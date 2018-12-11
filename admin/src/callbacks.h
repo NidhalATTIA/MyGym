@@ -1,12 +1,22 @@
 #include <gtk/gtk.h>
 
+/*--------------------------page_d'accueil------------------------*/
+
+void
+on_connexion_accueil_clicked           (GtkWidget       *obj,
+                                        gpointer         user_data);
+
+void
+on_quitterapp_clicked                  (GtkWidget       *obj,
+                                        gpointer         user_data);
+
 /*-------------------------authentification-----------------------*/
 void
 on_connexion_clicked                   (GtkWidget       *obj,
                                         gpointer         user_data);
 
 void
-on_quitterapp_clicked                  (GtkWidget       *obj,
+on_paccueil_clicked                    (GtkWidget       *obj,
                                         gpointer         user_data);
 
 /*-------------------------espaceAdmin----------------------------*/
@@ -33,6 +43,10 @@ on_gdiet_clicked                       (GtkWidget       *obj,
 
 void
 on_gkine_clicked                       (GtkWidget       *obj,
+                                        gpointer         user_data);
+
+void
+on_gaccueil_clicked                    (GtkWidget       *obj,
                                         gpointer         user_data);
 
 /*-----------------------------fgadherent---------------------------*/
@@ -376,4 +390,14 @@ on_vsupprimer_kine_clicked             (GtkWidget       *obj,
 
 void
 on_qsupprimer_kine_clicked             (GtkWidget       *obj,
+                                        gpointer         user_data);
+
+/*-----------------------------fgaccueil--------------------------*/
+
+void
+on_vgaccueil_clicked                   (GtkWidget       *obj,
+                                        gpointer         user_data);
+
+void
+on_qgaccueil_clicked                   (GtkWidget       *obj,
                                         gpointer         user_data);

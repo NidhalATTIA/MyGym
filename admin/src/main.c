@@ -15,7 +15,7 @@
 int
 main (int argc, char *argv[])
 {
-  GtkWidget *authentification;
+  GtkWidget *faccueil;
 //  GtkWidget *espaceAdmin; 
 
 #ifdef ENABLE_NLS
@@ -34,8 +34,8 @@ main (int argc, char *argv[])
    * (except popup menus), just so that you see something after building
    * the project. Delete any components that you don't want shown initially.
    */
-  authentification = create_authentification ();
-  gtk_widget_show (authentification);
+  faccueil = create_faccueil ();
+  gtk_widget_show (faccueil);
 //  espaceAdmin = create_espaceAdmin ();
 //  gtk_widget_show (espaceAdmin);
 

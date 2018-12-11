@@ -171,34 +171,28 @@ void supprimer_adherent(char cinn[20])
 
 /*-----------------------modifier_adherent----------------------------*/
 
-void modifier_adherent(Adherent adm,char cinn[50])
+void modifier_adherent(Adherent ad)
 {
-Adherent ad;
+Adherent adm;
 FILE *f;
-FILE *f2;
-f=fopen("/home/nidhal/Projects/admin/src/adherent.txt","r");
-f2=fopen("/home/nidhal/Projects/admin/src/nadherent.txt","w"); 
-if (f!=NULL)
-{
-if (f2!=NULL)
+FILE *f1;
 
-{ 
-     while (fscanf(f,"%s %s %s %s %s %s %s %s \n",ad.a_nom,ad.a_prenom, ad.a_cin, ad.a_jour, ad.a_mois, ad.a_an, ad.a_mail, ad.a_adresse)!=EOF)
-    { 
-    if((strcmp(cinn,ad.a_cin))!=0)
-    {
-    fprintf(f2,"%s %s %s %s %s %s %s %s \n",ad.a_nom,ad.a_prenom, ad.a_cin, ad.a_jour, ad.a_mois, ad.a_an, ad.a_mail, ad.a_adresse);
-     }
-else {
-	fprintf(f2,"%s %s %s %s %s %s %s %s \n",adm.a_nom,adm.a_prenom, adm.a_cin, adm.a_jour, adm.a_mois, adm.a_an, adm.a_mail, adm.a_adresse);
-     }
-     }
-     }}
+
+f=fopen("/home/nidhal/Projects/admin/src/adherent.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/adherent.tmp","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s",adm.a_nom,adm.a_prenom,adm.a_cin,adm.a_jour,adm.a_mois,adm.a_an,adm.a_mail,adm.a_adresse)!=EOF)
+{
+	if (strcmp(ad.a_cin,adm.a_cin)!=0)
+	{
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",adm.a_nom,adm.a_prenom,adm.a_cin,adm.a_jour,adm.a_mois,adm.a_an,adm.a_mail,adm.a_adresse);}
+	else {
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",ad.a_nom,ad.a_prenom,ad.a_cin,ad.a_jour,ad.a_mois,ad.a_an,ad.a_mail,ad.a_adresse);  } 
+}
 fclose(f);
-fclose(f2);
+fclose(f1);
 
 remove("/home/nidhal/Projects/admin/src/adherent.txt") ;
-rename ("/home/nidhal/Projects/admin/src/nadherent.txt" , "/home/nidhal/Projects/admin/src/adherent.txt") ;
+rename("/home/nidhal/Projects/admin/src/adherent.tmp" , "/home/nidhal/Projects/admin/src/adherent.txt");
 }
 
 ///////////////////COACH//////////////////////
@@ -345,6 +339,31 @@ void supprimer_coach(char cinn[20])
 	rename("/home/nidhal/Projects/admin/src/coach.tmp","/home/nidhal/Projects/admin/src/coach.txt");
 }
 
+/*-----------------------modifier_coach----------------------------*/
+
+void modifier_coach(Coach co)
+{
+Coach com;
+FILE *f;
+FILE *f1;
+
+
+f=fopen("/home/nidhal/Projects/admin/src/coach.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/coach.tmp","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s",com.c_nom,com.c_prenom,com.c_cin,com.c_jour,com.c_mois,com.c_an,com.c_mail,com.c_adresse)!=EOF)
+{
+	if (strcmp(co.c_cin,com.c_cin)!=0)
+	{
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",com.c_nom,com.c_prenom,com.c_cin,com.c_jour,com.c_mois,com.c_an,com.c_mail,com.c_adresse);}
+	else {
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",co.c_nom,co.c_prenom,co.c_cin,co.c_jour,co.c_mois,co.c_an,co.c_mail,co.c_adresse);  } 
+}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/coach.txt") ;
+rename("/home/nidhal/Projects/admin/src/coach.tmp" , "/home/nidhal/Projects/admin/src/coach.txt");
+}
 
 /////////////////MEDECIN//////////////////
 
@@ -489,6 +508,33 @@ void supprimer_medecin(char cinn[20])
 	remove("/home/nidhal/Projects/admin/src/medecin.txt");
 	rename("/home/nidhal/Projects/admin/src/medecin.tmp","/home/nidhal/Projects/admin/src/medecin.txt");
 }
+
+/*-----------------------modifier_medecin----------------------------*/
+
+void modifier_medecin(Medecin med)
+{
+Medecin medm;
+FILE *f;
+FILE *f1;
+
+
+f=fopen("/home/nidhal/Projects/admin/src/med.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/med.tmp","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s",medm.m_nom,medm.m_prenom,medm.m_cin,medm.m_jour,medm.m_mois,medm.m_an,medm.m_mail,medm.m_adresse)!=EOF)
+{
+	if (strcmp(med.m_cin,medm.m_cin)!=0)
+	{
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",medm.m_nom,medm.m_prenom,medm.m_cin,medm.m_jour,medm.m_mois,medm.m_an,medm.m_mail,medm.m_adresse);}
+	else {
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",med.m_nom,med.m_prenom,med.m_cin,med.m_jour,med.m_mois,med.m_an,med.m_mail,med.m_adresse);  } 
+}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/med.txt") ;
+rename("/home/nidhal/Projects/admin/src/med.tmp" , "/home/nidhal/Projects/admin/src/med.txt");
+}
+
 ////////////DIETETICIEN/////////////////////
 
 /*------------------------ajouter_diet--------------------------*/
@@ -631,6 +677,32 @@ void supprimer_diet(char cinn[20])
 	fclose(t);
 	remove("/home/nidhal/Projects/admin/src/diet.txt");
 	rename("/home/nidhal/Projects/admin/src/diet.tmp","/home/nidhal/Projects/admin/src/diet.txt");
+}
+
+/*-----------------------modifier_diet----------------------------*/
+
+void modifier_diet(Diet diet)
+{
+Diet dietm;
+FILE *f;
+FILE *f1;
+
+
+f=fopen("/home/nidhal/Projects/admin/src/diet.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/diet.tmp","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s",dietm.d_nom,dietm.d_prenom,dietm.d_cin,dietm.d_jour,dietm.d_mois,dietm.d_an,dietm.d_mail,dietm.d_adresse)!=EOF)
+{
+	if (strcmp(diet.d_cin,dietm.d_cin)!=0)
+	{
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",dietm.d_nom,dietm.d_prenom,dietm.d_cin,dietm.d_jour,dietm.d_mois,dietm.d_an,dietm.d_mail,dietm.d_adresse);}
+	else {
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",diet.d_nom,diet.d_prenom,diet.d_cin,diet.d_jour,diet.d_mois,diet.d_an,diet.d_mail,diet.d_adresse);  } 
+}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/diet.txt") ;
+rename("/home/nidhal/Projects/admin/src/diet.tmp" , "/home/nidhal/Projects/admin/src/diet.txt");
 }
 
 ///////////////KINESITHERAPEUTE///////////////////
@@ -776,4 +848,81 @@ void supprimer_kine(char cinn[20])
 	remove("/home/nidhal/Projects/admin/src/kine.txt");
 	rename("/home/nidhal/Projects/admin/src/kine.tmp","/home/nidhal/Projects/admin/src/kine.txt");
 }
+
+/*-----------------------modifier_kine----------------------------*/
+
+void modifier_kine(Kine kine)
+{
+Kine kinem;
+FILE *f;
+FILE *f1;
+
+
+f=fopen("/home/nidhal/Projects/admin/src/kine.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/kine.tmp","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s",kinem.k_nom,kinem.k_prenom,kinem.k_cin,kinem.k_jour,kinem.k_mois,kinem.k_an,kinem.k_mail,kinem.k_adresse)!=EOF)
+{
+	if (strcmp(kine.k_cin,kinem.k_cin)!=0)
+	{
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",kinem.k_nom,kinem.k_prenom,kinem.k_cin,kinem.k_jour,kinem.k_mois,kinem.k_an,kinem.k_mail,kinem.k_adresse);}
+	else {
+		fprintf(f1,"%s %s %s %s %s %s %s %s \n",kine.k_nom,kine.k_prenom,kine.k_cin,kine.k_jour,kine.k_mois,kine.k_an,kine.k_mail,kine.k_adresse);  } 
+}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/kine.txt") ;
+rename("/home/nidhal/Projects/admin/src/kine.tmp" , "/home/nidhal/Projects/admin/src/kine.txt");
+}
+
+///////////ACCUEIL///////////////////
+
+/*-----------------------modifier_medecin----------------------------*/
+
+void modifier_accueil1 ()
+{
+FILE *f;
+FILE *f1;
+
+char event1[80];
+char event[80];
+
+f=fopen("/home/nidhal/Projects/admin/src/gaccueil1.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/gaccueil1.tmp","a+");
+while (fscanf(f,"%s",event)!=EOF)
+{
+		fprintf(f1,"%s \n",event1);
+		fprintf(f1,"%s \n",event);}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/gacceuil1.txt") ;
+rename("/home/nidhal/Projects/admin/src/gaccueil1.tmp" , "/home/nidhal/Projects/admin/src/gacceuil1.txt");
+
+}
+
+/////////////////////////////////////////////
+
+void modifier_accueil2 ()
+{
+FILE *f;
+FILE *f1;
+
+char event1[80];
+char event[80];
+
+f=fopen("/home/nidhal/Projects/admin/src/gaccueil2.txt","r");
+f1=fopen("/home/nidhal/Projects/admin/src/gaccueil2.tmp","a+");
+while (fscanf(f,"%s",event)!=EOF)
+{
+		fprintf(f1,"%s \n",event1);
+		fprintf(f1,"%s \n",event);}
+fclose(f);
+fclose(f1);
+
+remove("/home/nidhal/Projects/admin/src/gacceuil2.txt") ;
+rename("/home/nidhal/Projects/admin/src/gaccueil2.tmp" , "/home/nidhal/Projects/admin/src/gacceuil2.txt");
+
+}
+
 

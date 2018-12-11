@@ -34,3 +34,5 @@ GtkWidget* create_fsupprimer_coach (void);
 GtkWidget* create_fsupprimer_med (void);
 GtkWidget* create_fsupprimer_diet (void);
 GtkWidget* create_fsupprimer_kine (void);
+GtkWidget* create_faccueil (void);
+GtkWidget* create_fgaccueil (void);

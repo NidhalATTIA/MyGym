@@ -26,7 +26,7 @@ void afficher_adherent(GtkWidget *liste);
 
 void supprimer_adherent(char cinn[20]);
 
-void modifier_adherent(Adherent adm,char cinn[50]);
+void modifier_adherent(Adherent ad);
 
 /*-------------------structure_coach---------------------*/
 
@@ -52,6 +52,8 @@ void afficher_coach(GtkWidget *liste);
 
 void supprimer_coach(char cinn[20]);
 
+void modifier_coach(Coach co);
+
 /*-------------------structure_medecin---------------------*/
 
 typedef struct
@@ -75,6 +77,8 @@ void ajouter_medecin(Medecin med);
 void afficher_medecin(GtkWidget *liste);
 
 void supprimer_medecin(char cinn[20]);
+
+void modifier_medecin(Medecin med);
 
 /*-------------------structure_dieteticien---------------------*/
 
@@ -100,6 +104,8 @@ void afficher_diet(GtkWidget *liste);
 
 void supprimer_diet(char cinn[20]);
 
+void modifier_diet(Diet diet);
+
 /*-------------------structure_kine---------------------*/
 
 typedef struct
@@ -114,8 +120,6 @@ char k_an[20];
 char k_mail[30];
 char k_adresse[50];
 
-
-
 }Kine;
 
 void ajouter_kine(Kine kine);
@@ -124,5 +128,11 @@ void afficher_kine(GtkWidget *liste);
 
 void supprimer_kine(char cinn[20]);
 
+void modifier_kine(Kine kine);
 
+/*-----------------------g_accueil-----------------------------------------*/
+
+void modifier_accueil1 ();
+
+void modifier_accueil2 ();
 
