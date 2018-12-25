@@ -38,6 +38,24 @@ enum{
 	HEURE3,
 	COLUMNS3
 };
+enum{
+	CINa,
+	PRENOMa,
+	NOMa,
+	TELa,
+	EMAILa,
+	COLUMNS5
+
+};
+enum{
+	CINad,
+	PRENOMad,
+	NOMad,
+	TELad,
+	EMAILad,
+	COLUMNS6
+
+};
 
 /* ----- fonction verifier --------*/
 personne verifier (char login[], char password[])
@@ -86,9 +104,9 @@ if ((a!=NULL) && (strcmp(p.prole,"Administrateur")==0)){
 fprintf(a,"%s %s %s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.ppseudo,p.ppassword,p.pdatenaissance,p.pdateinscrit,"pas_encore_saisie","pas_encore_saisie");
 }
 fclose(a);
-if ((d!=NULL) && (strcmp(p.prole,"Adhérent")==0)){
-fprintf(d,"%s %s %s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.pdatenaissance,"pas_encore_saisie","pas_encore_saisie","pas_encore_saisie","pas_encore_saisie","pas_encore_saisie","pas_encore_saisie");
-if(x!=NULL){fprintf(a,"%s %s %s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.ppseudo,p.ppassword,p.pdatenaissance,p.pdateinscrit,"pas_encore_saisie","pas_encore_saisie");}}
+if ((d!=NULL) && (strcmp(p.prole,"Adhérent")==0)&& (x!=NULL)){
+fprintf(d,"%s %s %s %s %s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.ppseudo,p.ppassword,p.pdatenaissance,p.pdateinscrit,"pas_encore_saisie","pas_encore_saisie","pas_encore_saisie","pas_encore_saisie");
+fprintf(x,"%s %s %s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.pdatenaissance,p.pdateinscrit,"pas_encore_saisie","pas_encore_saisie","pas_encore_saisie","pas_encore_saisie");}
 fclose(d);
 fclose(x);
 
@@ -126,6 +144,37 @@ if(strcmp(cin,a.acin)==0){return a;}
 fclose(f);
 }
 
+void supprimercoach(char cin[]){
+
+FILE*l;
+FILE*t;
+FILE*f;
+FILE*d;
+Coach b;
+personne p;
+f=fopen("personne.txt","r");
+d=fopen("coach.txt","r");
+l=fopen("tamp2.txt","a+");
+t=fopen("tamp.txt","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.ppseudo,p.ppassword,p.pdatenaissance,p.pdateinscrit)!=EOF)//na9raw mil fichier temporaire
+{
+fscanf(d,"%s %s %s %s %s %s %s %s %s %s %s\n",b.ccin,b.cprenom,b.cnom,b.crole,b.cpseudo,b.cpassword,b.cdatenaissance,b.cdateinscrit,b.cspecialite,b.cnumerotel,b.cemail);
+if ((strcmp(p.pcin,cin)!=0))//ken la valeur ili na9raw fiha differente mil parametre ya3ni ncopiw i ligne fel fichier e jdid
+{
+fprintf(t,"%s %s %s %s %s %s %s %s %s %s %s\n",b.ccin,b.cprenom,b.cnom,b.crole,b.cpseudo,b.cpassword,b.cdatenaissance,b.cdateinscrit,b.cspecialite,b.cnumerotel,b.cemail);
+//copie de la ligne fel fichier jdid
+fprintf(l,"%s %s %s %s %s %s %s %s\n",p.pcin,p.pprenom,p.pnom,p.prole,p.ppseudo,p.ppassword,p.pdatenaissance,p.pdateinscrit);
+}else{g_print("trouver");}
+}
+fclose(f);
+fclose(d);
+fclose(l);
+fclose(t);
+remove("coach.txt");//nfas5ou il fichier li9dim
+rename("tamp.txt","coach.txt");
+remove("personne.txt");
+rename("tamp2.txt","personne.txt");
+}
 void profileadmin(Admin a){
 
 FILE*d;
@@ -146,6 +195,28 @@ fclose(d);
 fclose(t);
 remove("admin.txt"); 
 rename("temp.txt","admin.txt");
+}
+void supprimeradherent(char cin[]){
+
+
+FILE*t;
+FILE*f;
+Adherent b;
+f=fopen("adherent.txt","r");
+t=fopen("tamp.txt","a+");
+while (fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s %s\n",b.pcin,b.pprenom,b.pnom,b.prole,b.ppseudo,b.ppassword,b.pdatenaissance,b.pdateinscrit,b.taille,b.poids,b.numerotelad,b.email)!=EOF)//na9raw mil fichier temporaire
+{
+
+if ((strcmp(b.pcin,cin)!=0))//ken la valeur ili na9raw fiha differente mil parametre ya3ni ncopiw i ligne fel fichier e jdid
+{
+fprintf(t,"%s %s %s %s %s %s %s %s %s %s %s %s\n",b.pcin,b.pprenom,b.pnom,b.prole,b.ppseudo,b.ppassword,b.pdatenaissance,b.pdateinscrit,b.taille,b.poids,b.numerotelad,b.email);
+//copie de la ligne fel fichier jdid
+}else{g_print("trouver");}
+}
+fclose(f);
+fclose(t);
+remove("adherent.txt");//nfas5ou il fichier li9dim
+rename("tamp.txt","adherent.txt");
 }
 
 /*   --------- fonction adherent -------------- */
@@ -184,6 +255,7 @@ fclose(t);
 remove("adherent.txt"); 
 rename("temp.txt","adherent.txt");
 }
+
 void sinscrireaucour(Adherent a,gchar *cin,gchar *date,gchar *type,gchar *heure){
 FILE*f;
 FILE*d;
@@ -521,7 +593,7 @@ void profilemedecin(Medecin a){
 FILE*d;
 FILE*t;
 Medecin b;
-d=fopen("medecin.txt","r");
+d=fopen("medcin.txt","r");
 t=fopen("temp.txt","a+");
 if(d!=NULL){
 while(fscanf(d,"%s %s %s %s %s %s %s %s %s %s %s\n",b.mcin,b.mprenom,b.mnom,b.mrole,b.mpseudo,b.mpassword,b.mdatenaissance,b.mdateinscrit,b.specialite,b.mtel,b.memail)!=EOF)
@@ -534,8 +606,8 @@ fprintf(t,"%s %s %s %s %s %s %s %s %s %s %s\n",b.mcin,b.mprenom,b.mnom,b.mrole,b
 }
 fclose(d);
 fclose(t);
-remove("medecin.txt"); 
-rename("temp.txt","medecin.txt");
+remove("medcin.txt"); 
+rename("temp.txt","medcin.txt");
 }
 /*-----  fonction kiné  ---------*/
 
@@ -639,3 +711,94 @@ fprintf(d,"%s %s %s\n",type,date,heure);
 fclose(f);
 fclose(d);
 }
+
+void afficheradherent(GtkWidget *liste){
+GtkCellRenderer *renderer;
+GtkTreeViewColumn *column;
+GtkTreeIter iter;
+GtkListStore *store;
+Adherent b;
+store=NULL;
+FILE*f;
+store=gtk_tree_view_get_model(liste);
+
+if(store == NULL){
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Cin",renderer,"text",CINa,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("prenom",renderer,"text",PRENOMa,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Nom",renderer,"text",NOMa,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Numero tel",renderer,"text",TELa,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Email",renderer,"text",EMAILa,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+
+store = gtk_list_store_new(COLUMNS5, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+f=fopen("adherent.txt","r");
+if (f!=NULL){
+while(fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s %s\n",b.pcin,b.pprenom,b.pnom,b.prole,b.ppseudo,b.ppassword,b.pdatenaissance,b.pdateinscrit,b.poids,b.taille,b.numerotelad,b.email)!=EOF){
+
+gtk_list_store_append(store,&iter);
+gtk_list_store_set(store,&iter,CINa,b.pcin,PRENOMa,b.pprenom,NOMa,b.pnom,TELa,b.numerotelad,EMAILa,b.email,-1);
+}
+fclose(f);
+gtk_tree_view_set_model(GTK_TREE_VIEW(liste), GTK_TREE_MODEL(store));
+g_object_unref(store);
+}
+}
+}
+void afficherevenement(GtkWidget *liste){
+
+}
+void afficherboutique(GtkWidget *liste){
+
+}
+
+void afficheradmin(GtkWidget *liste){
+GtkCellRenderer *renderer;
+GtkTreeViewColumn *column;
+GtkTreeIter iter;
+GtkListStore *store;
+Admin b;
+store=NULL;
+FILE*f;
+store=gtk_tree_view_get_model(liste);
+
+if(store == NULL){
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Cin",renderer,"text",CINad,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("prenom",renderer,"text",PRENOMad,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Nom",renderer,"text",NOMad,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Numero tel",renderer,"text",TELad,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+renderer = gtk_cell_renderer_text_new();
+column = gtk_tree_view_column_new_with_attributes("Email",renderer,"text",EMAILad,NULL);
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste),column);
+
+store = gtk_list_store_new(COLUMNS5, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+f=fopen("admin.txt","r");
+if (f!=NULL){
+while(fscanf(f,"%s %s %s %s %s %s %s %s %s %s\n",b.acin,b.aprenom,b.anom,b.arole,b.apseudo,b.apassword,b.adatenaissance,b.adateinscrit,b.atel,b.aemail)!=EOF){
+
+gtk_list_store_append(store,&iter);
+gtk_list_store_set(store,&iter,CINad,b.acin,PRENOMad,b.aprenom,NOMad,b.anom,TELad,b.atel,EMAILad,b.aemail,-1);
+}
+fclose(f);
+gtk_tree_view_set_model(GTK_TREE_VIEW(liste), GTK_TREE_MODEL(store));
+g_object_unref(store);
+}
+}
+}
+

@@ -309,3 +309,43 @@ on_treeviewdisponibilitepouradherent_row_activated
 void
 on_buttonprendrerdv_clicked            (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_buttonprofiladmin_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonmodifierprofiladmin_clicked   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonenregistermodifadmin_clicked  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonprofilcoach_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonprofilmedecin_clicked         (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonprofilkine_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonconfirmer_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonannuler_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonsuppretionadherent_clicked    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_buttonannuleradherent_clicked       (GtkButton       *button,
+                                        gpointer         user_data);

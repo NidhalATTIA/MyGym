@@ -9,17 +9,26 @@
 #include "support.h"
 #include "verifier.h"
 #include "string.h"
+GtkWidget *windowconfirmationadherent;
+GtkWidget *windowconfirmation;
+GtkWidget *widowmodifierprofilkine;
+GtkWidget *windowprofilkine;
+GtkWidget *windowmodifierprofilmedecin;
+GtkWidget *windowprofilmedecin;
+GtkWidget *windowmodifierprofilcoach;
+GtkWidget *windowprofilcoach;
+GtkWidget *windowmodifierprofiladmin;
 GtkWidget *affichercourspouradherent; 
- GtkWidget *ajoutmembre;
- GtkWidget *acceuilnc;
- GtkWidget *windowconnexion;
- GtkWidget *acceuiladheren;
- GtkWidget *acceuiladmin;
- GtkWidget *acceuilcoach;
- GtkWidget *accueilmedecin;
- GtkWidget *ajoutmembre;
- GtkWidget *afficherprofilad;
- GtkWidget *modifierprofil;
+GtkWidget *ajoutmembre;
+GtkWidget *acceuilnc;
+GtkWidget *windowconnexion;
+GtkWidget *acceuiladheren;
+GtkWidget *acceuiladmin;
+GtkWidget *acceuilcoach;
+GtkWidget *accueilmedecin;
+GtkWidget *ajoutmembre;
+GtkWidget *afficherprofilad;
+GtkWidget *modifierprofil;
 GtkWidget *entreepoids;
 GtkWidget *entreetaille;
 GtkWidget *entreenumerotel;
@@ -28,7 +37,8 @@ GtkWidget *labeltestafftree;
 GtkWidget *acceuilkine;
 GtkWidget *courscoach;
 GtkWidget *ajoutercours;
-
+GtkWidget *afficherprofiladmin;
+ gchar *cincoach;
  gchar *prenomcoachpourinscrit;
  gchar *nomcoachpourinscrit;
  gchar *prenomkinepourinscrit;
@@ -121,23 +131,49 @@ treeviewevenementadherent=lookup_widget(acceuiladheren,"treeviewevenementadheren
 labeltestafftree=lookup_widget(acceuiladheren,"labeltestafftree");
 affichercoachsad(treeviewcoachadherent);
 afficherkinesad(treeviewstaffmedicaladherent);
+GtkWidget *treeview10;
+treeview10 = lookup_widget(acceuiladheren,"treeview10");
+afficheradmin(treeview10);
 }else if (strcmp(p.prole,"Administrateur")==0){
 a=chargeradmin(p.pcin);
 acceuiladmin=create_acceuiladmin();
  gtk_widget_destroy(windowconnexion);
   gtk_widget_show(acceuiladmin);
-  
+GtkWidget *treeviewlistecoachadmin;
+treeviewlistecoachadmin =lookup_widget(acceuiladmin,"treeviewlistecoachadmin");
+affichercoachsad(treeviewlistecoachadmin);
+GtkWidget *treeviewlistestaffmedicaladmin;
+treeviewlistestaffmedicaladmin = lookup_widget(acceuiladmin,"treeviewlistestaffmedicaladmin");
+afficherkinesad(treeviewlistestaffmedicaladmin);
+GtkWidget *treeviewlisteadherentadmin;
+treeviewlisteadherentadmin = lookup_widget(acceuiladmin,"treeviewlisteadherentadmin");
+afficheradherent(treeviewlisteadherentadmin);
+GtkWidget *treeview19;
+treeview19=lookup_widget(acceuiladmin,"treeview19");
+  afficheradmin(treeview19);
 }else if(strcmp(p.prole,"Coach")==0){
         c=chargercoach(p.pcin);
 	acceuilcoach=create_acceuilcoach();
  	gtk_widget_destroy(windowconnexion);
   gtk_widget_show(acceuilcoach);
+ GtkWidget *treeview27;
+treeview27 = lookup_widget(acceuilcoach,"treeview27");
+affichercoachsad(treeview27);
+GtkWidget *treeview28;
+treeview28 = lookup_widget(acceuilcoach,"treeview28");
+afficherkinesad(treeview28);
+GtkWidget *treeviewlisteadherentcoach;
+treeviewlisteadherentcoach = lookup_widget(acceuilcoach,"treeviewlisteadherentcoach");
+afficheradherent(treeviewlisteadherentcoach); 
+
+
 }else if(strcmp(p.prole,"Médecin")==0){
 
 m=chargermedecin(p.pcin);
 accueilmedecin=create_accueilmedecin();
 gtk_widget_destroy(windowconnexion);
 gtk_widget_show(accueilmedecin);
+
 
 }else if(strcmp(p.prole,"Kinésithérapeute")==0){
 k=chargerkine(p.pcin);
@@ -445,9 +481,22 @@ on_treeviewlistecoachadmin_row_activated
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
+GtkTreeIter   iter;
+  GtkTreeModel *model;
 
+  model = gtk_tree_view_get_model(treeview);
+
+  if (gtk_tree_model_get_iter(model, &iter, path))
+  {
+
+    gtk_tree_model_get(model, &iter, CIN, &cincoach, -1);
+
+    g_print ("The row containing the name '%s' has been double-clicked.\n", cincoach);
+    windowconfirmation= create_windowconfirmation();
+    gtk_widget_show(windowconfirmation);	
+    
 }
-
+}
 
 void
 on_treeviewlistestaffmedicaladmin_row_activated
@@ -456,7 +505,19 @@ on_treeviewlistestaffmedicaladmin_row_activated
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
+GtkTreeIter   iter;
+  GtkTreeModel *model;
 
+  model = gtk_tree_view_get_model(treeview);
+
+  if (gtk_tree_model_get_iter(model, &iter, path))
+  {
+
+    gtk_tree_model_get(model, &iter, CIN, &cincoach, -1);
+
+    g_print ("The row containing the name '%s' has been double-clicked.\n", cincoach);
+    
+}
 }
 
 
@@ -467,7 +528,20 @@ on_treeviewlisteadherentadmin_row_activated
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
+GtkTreeIter   iter;
+  GtkTreeModel *model;
 
+  model = gtk_tree_view_get_model(treeview);
+
+  if (gtk_tree_model_get_iter(model, &iter, path))
+  {
+
+    gtk_tree_model_get(model, &iter, CIN, &cincoach, -1);
+
+    g_print ("The row containing the name '%s' has been double-clicked.\n", cincoach);
+    windowconfirmationadherent=create_windowconfirmationadherent();
+    gtk_widget_show(windowconfirmationadherent);
+}
 }
 
 
@@ -508,7 +582,19 @@ on_treeviewlisteadherentcoach_row_activated
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
+GtkTreeIter   iter;
+  GtkTreeModel *model;
 
+  model = gtk_tree_view_get_model(treeview);
+
+  if (gtk_tree_model_get_iter(model, &iter, path))
+  {
+
+    gtk_tree_model_get(model, &iter, CIN, &cincoach, -1);
+
+    g_print ("The row containing the name '%s' has been double-clicked.\n", cincoach);
+    
+}
 }
 
 
@@ -519,7 +605,19 @@ on_treeviewlisteadherentkine_row_activated
                                         GtkTreeViewColumn *column,
                                         gpointer         user_data)
 {
+GtkTreeIter   iter;
+  GtkTreeModel *model;
 
+  model = gtk_tree_view_get_model(treeview);
+
+  if (gtk_tree_model_get_iter(model, &iter, path))
+  {
+
+    gtk_tree_model_get(model, &iter, CIN, &cincoach, -1);
+
+    g_print ("The row containing the name '%s' has been double-clicked.\n", cincoach);
+    
+}
 }
 
 
@@ -570,6 +668,10 @@ on_buttonmodifprofilcoach_clicked      (GtkButton       *button,
                                         gpointer         user_data)
 {
 
+
+windowmodifierprofilcoach = create_windowmodifierprofilcoach();
+  gtk_widget_show (windowmodifierprofilcoach);
+ gtk_widget_destroy(windowprofilcoach);
 }
 
 
@@ -577,7 +679,9 @@ void
 on_buttonmodifprofilmedecin_clicked    (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+windowmodifierprofilmedecin = create_windowmodifierprofilmedecin();
+  gtk_widget_show (windowmodifierprofilmedecin);
+ gtk_widget_destroy(windowprofilmedecin);
 }
 
 
@@ -586,6 +690,9 @@ on_buttonmodifprofilkine_clicked       (GtkButton       *button,
                                         gpointer         user_data)
 {
 
+widowmodifierprofilkine = create_widowmodifierprofilkine();
+  gtk_widget_show (widowmodifierprofilkine);
+ gtk_widget_destroy(windowprofilkine);
 }
 
 
@@ -593,7 +700,18 @@ void
 on_buttonenregistermodifcoach_clicked  (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+GtkWidget *entryspecialitecoach;
+GtkWidget *entrynumtelcoach;
+GtkWidget *entryemailcoach;
+entryspecialitecoach=lookup_widget(windowmodifierprofilcoach,"entryspecialitecoach");
+entrynumtelcoach=lookup_widget(windowmodifierprofilcoach,"entrynumtelcoach");
+entryemailcoach=lookup_widget(windowmodifierprofilcoach,"entryemailcoach");
+strcpy(c.cspecialite,gtk_entry_get_text(GTK_ENTRY(entryspecialitecoach)));
+strcpy(c.cnumerotel,gtk_entry_get_text(GTK_ENTRY(entrynumtelcoach)));
+strcpy(c.cemail,gtk_entry_get_text(GTK_ENTRY(entryemailcoach)));
+profileCoach(c);
+c=chargercoach(c.ccin);
+gtk_widget_destroy(windowmodifierprofilcoach);
 }
 
 
@@ -602,7 +720,18 @@ on_buttonenregistermodifmedecin_clicked
                                         (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+GtkWidget *entryspecialitemed;
+GtkWidget *entrytelmed;
+GtkWidget *entryemailmed;
+entryspecialitemed=lookup_widget(windowmodifierprofilmedecin,"entryspecialitemed");
+entrytelmed=lookup_widget(windowmodifierprofilmedecin,"entrytelmed");
+entryemailmed=lookup_widget(windowmodifierprofilmedecin,"entryemailmed");
+strcpy(m.specialite,gtk_entry_get_text(GTK_ENTRY(entryspecialitemed)));
+strcpy(m.mtel,gtk_entry_get_text(GTK_ENTRY(entrytelmed)));
+strcpy(m.memail,gtk_entry_get_text(GTK_ENTRY(entryemailmed)));
+profilemedecin(m);
+m=chargermedecin(m.mcin);
+gtk_widget_destroy(windowmodifierprofilmedecin);
 }
 
 
@@ -610,7 +739,18 @@ void
 on_buttonenregistermodifkine_clicked   (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+GtkWidget *entryspecialitekine;
+GtkWidget *entrytelkine;
+GtkWidget *entryemailkine;
+entryspecialitekine=lookup_widget(widowmodifierprofilkine,"entryspecialitekine");
+entrytelkine=lookup_widget(widowmodifierprofilkine,"entrytelkine");
+entryemailkine=lookup_widget(widowmodifierprofilkine,"entryemailkine");
+strcpy(k.specialite,gtk_entry_get_text(GTK_ENTRY(entryspecialitekine)));
+strcpy(k.dtel,gtk_entry_get_text(GTK_ENTRY(entrytelkine)));
+strcpy(k.demail,gtk_entry_get_text(GTK_ENTRY(entryemailkine)));
+profileKine(k);
+k=chargerkine(k.dcin);
+gtk_widget_destroy(widowmodifierprofilkine);
 }
 
 
@@ -886,5 +1026,103 @@ on_buttonprendrerdv_clicked            (GtkButton       *button,
                                         gpointer         user_data)
 {
 sinscrireaurdv(b,cinkinepourinscrit,daterdvpourinscrit,typerdvpourinscrit,heurerdvpourinscrit);
+}
+
+
+void
+on_buttonprofiladmin_clicked           (GtkButton       *button,
+                                        gpointer         user_data)
+{
+afficherprofiladmin = create_afficherprofiladmin();
+  gtk_widget_show (afficherprofiladmin);
+}
+
+
+void
+on_buttonmodifierprofiladmin_clicked   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+windowmodifierprofiladmin = create_windowmodifierprofiladmin();
+  gtk_widget_show (windowmodifierprofiladmin);
+ gtk_widget_destroy(afficherprofiladmin);
+}
+
+
+void
+on_buttonenregistermodifadmin_clicked  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+GtkWidget *entryemailadmin;
+GtkWidget *entryteladmin;
+entryteladmin=lookup_widget(windowmodifierprofiladmin,"entryteladmin");
+entryemailadmin=lookup_widget(windowmodifierprofiladmin,"entryemailadmin");
+strcpy(a.atel,gtk_entry_get_text(GTK_ENTRY(entryteladmin)));
+strcpy(a.aemail,gtk_entry_get_text(GTK_ENTRY(entryemailadmin)));
+
+profileadmin(a);
+a=chargeradmin(a.acin);
+gtk_widget_destroy(windowmodifierprofiladmin);
+}
+
+
+void
+on_buttonprofilcoach_clicked           (GtkButton       *button,
+                                        gpointer         user_data)
+{
+windowprofilcoach = create_windowprofilcoach();
+  gtk_widget_show (windowprofilcoach);
+}
+
+
+void
+on_buttonprofilmedecin_clicked         (GtkButton       *button,
+                                        gpointer         user_data)
+{
+windowprofilmedecin = create_windowprofilmedecin();
+  gtk_widget_show (windowprofilmedecin);
+}
+
+
+void
+on_buttonprofilkine_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+windowprofilkine = create_windowprofilkine();
+  gtk_widget_show (windowprofilkine);
+}
+
+
+void
+on_buttonconfirmer_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+supprimercoach(cincoach);
+gtk_widget_destroy(windowconfirmation);
+}
+
+
+void
+on_buttonannuler_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+gtk_widget_destroy(windowconfirmation);
+}
+
+
+void
+on_buttonsuppretionadherent_clicked    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+supprimeradherent(cincoach);
+gtk_widget_destroy(windowconfirmationadherent);
+}
+
+
+void
+on_buttonannuleradherent_clicked       (GtkButton       *button,
+                                        gpointer         user_data)
+{
+gtk_widget_destroy(windowconfirmationadherent);
 }
 

@@ -33,3 +33,7 @@ GtkWidget* create_ajouterrdvkine (void);
 GtkWidget* create_affichercourspouradherent (void);
 GtkWidget* create_affichercours (void);
 GtkWidget* create_afficherdispopouradherent (void);
+GtkWidget* create_afficherprofiladmin (void);
+GtkWidget* create_windowmodifierprofiladmin (void);
+GtkWidget* create_windowconfirmation (void);
+GtkWidget* create_windowconfirmationadherent (void);

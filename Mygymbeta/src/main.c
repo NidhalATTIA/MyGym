@@ -39,7 +39,16 @@ main (int argc, char *argv[])
    */
 
 acceuilnc = create_acceuilnc();
- gtk_widget_show (acceuilnc);
+gtk_widget_show (acceuilnc);
+GtkWidget *treeviewcoachsnc;
+treeviewcoachsnc =lookup_widget(acceuilnc,"treeviewcoachsnc");
+affichercoachsad(treeviewcoachsnc);
+GtkWidget *treeviewstaffmedicalnc;
+treeviewstaffmedicalnc=lookup_widget(acceuilnc,"treeviewstaffmedicalnc");
+afficherkinesad(treeviewstaffmedicalnc);
+GtkWidget *treeviewadministrateurnc;
+treeviewadministrateurnc=lookup_widget(acceuilnc,"treeviewadministrateurnc");
+afficheradmin(treeviewadministrateurnc);
  /* windowconnexion = create_windowconnexion ();
   gtk_widget_show (windowconnexion);
   acceuiladheren = create_acceuiladheren ();

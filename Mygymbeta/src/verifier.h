@@ -62,6 +62,7 @@ void profileadmin(Admin a);
 
 Admin chargeradmin(char cin[]);
 void afficher_admin(GtkWidget *liste);
+void supprimercoach(gchar *cin);
 
 
 /* --------        structure adherents         ---------------*/
@@ -229,5 +230,9 @@ char date[30];
 void ajouter_dispodiet(dispoKine d);
 void afficher_dispodiet (GtkWidget *liste);
 void afficherdispopouradgherent(GtkWidget *liste,char cin[30]);
+void afficheradherent(GtkWidget *liste);
+void afficherevenement(GtkWidget *liste);
+void afficherboutique(GtkWidget *liste);
+void afficheradmin(GtkWidget *liste);
 #endif /* VERIFIER_H__*/
 
